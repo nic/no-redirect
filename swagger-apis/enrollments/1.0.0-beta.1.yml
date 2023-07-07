@@ -544,6 +544,7 @@ components:
       type: object
       required:
         - errors
+        - meta
       properties:
         errors:
           type: array
@@ -589,6 +590,8 @@ components:
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
 
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
+        meta:
+          $ref: '#/components/schemas/Meta'
     422ResponseErrorFidoSignOptions:
       type: object
       required:
@@ -1157,6 +1160,8 @@ components:
       type: object
       required:
         - data
+        - links
+        - meta
       properties:
         data:
           type: object
@@ -1206,6 +1211,10 @@ components:
               description: Campo de extensão com opções que variam por plataforma.
               additionalProperties:
                 type: string
+        links:
+          $ref: '#/components/schemas/LinkSingle'
+        meta:
+          $ref: '#/components/schemas/Meta'
     EnrollmentRejectionFrom:
       type: object
       required:
