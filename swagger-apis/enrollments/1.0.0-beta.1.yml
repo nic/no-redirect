@@ -445,6 +445,7 @@ components:
       type: object
       required:
         - errors
+        - meta
       properties:
         errors:
           type: array
@@ -490,6 +491,8 @@ components:
                   • PERMISSOES_INVALIDAS: As permissões associadas ao vínculo de conta não contêm "PAYMENTS_INITIATE" ou contém valores não suportados para esta operação.
                   
                   • CONTA_INVALIDA: A conta informada inexiste ou não é compatível com o fluxo de não-redirecionamento.
+        meta:
+          $ref: '#/components/schemas/Meta'
     422ResponseErrorFidoRegistrationOptions:
       type: object
       required:
@@ -1521,6 +1524,10 @@ components:
               $ref: '#/components/schemas/BusinessEntity'
             debtorAccount:
               $ref: '#/components/schemas/DebtorAccount'
+        links:
+          $ref: '#/components/schemas/LinkSingle'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseEnrollment:
       allOf:
         - $ref: '#/components/schemas/ResponseCreateEnrollment'
