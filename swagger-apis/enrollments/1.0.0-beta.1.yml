@@ -25,7 +25,7 @@ paths:
         - Dispositivo vinculado
       summary: Criar vínculo de conta.
       operationId: postEnrollments
-      description: Método para criar um novo vínculo de conta que será utilizado na ativação de um consentimento sem redirecionamento do usuário ao ambiente da detentora de conta.
+      description: Método para criar um novo vínculo de conta que será utilizado na ativação de um consentimento sem redirecionamento do usuário ao ambiente da detentora.
       parameters:
         - $ref: '#/components/parameters/Authorization'
         - $ref: '#/components/parameters/xFapiAuthDate'
@@ -1309,7 +1309,7 @@ components:
       description: |
         Permissões atribuídas ao vínculo de conta:
         
-        • PAYMENTS_INITIATE: Iniciação de pagamentos sem redirecionamento à detentora de conta.
+        • PAYMENTS_INITIATE: Iniciação de pagamentos sem redirecionamento à detentora.
     EnumEnrollmentCancelledFrom:
       type: string
       enum:
@@ -1332,7 +1332,7 @@ components:
       description: |
         Status do vínculo de conta:
         • AWAITING_AUTHORISATION: Vínculo de conta criado e aguando autorização no ambiente da dentora de conta.
-        • AWAITING_ENROLLMENT: Vínculo de conta autorizado no ambiente da detentora de conta e aguardando o vínculo de credenciais (FIDO2).
+        • AWAITING_ENROLLMENT: Vínculo de conta autorizado no ambiente da detentora e aguardando o vínculo de credenciais (FIDO2).
         • AUTHORISED: Vínculo de conta pronto para uso.
         • REVOKED: Vínculo de conta revogado.
         • REJECTED: Vínculo de conta rejeitado.
@@ -1727,7 +1727,7 @@ components:
             payments: Escopo necessário para acesso à API Payment Initiation.
     OAuth2JwtBearer:
       type: oauth2
-      description: Fluxo OAuth necessário para emitir um token de acesso a partir da validação de um challenge FIDO2, sem redirecionamento do usuário à detentora de conta.
+      description: Fluxo OAuth necessário para emitir um token de acesso a partir da validação de um challenge FIDO2, sem redirecionamento do usuário à detentora.
       flows:
         clientCredentials:
           tokenUrl: 'https://authserver.example/token'
