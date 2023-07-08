@@ -1090,7 +1090,7 @@ components:
                 additionalInformation:
                   type: string
                   format: '[\w\W\s]*'
-                  maxLength: 256
+                  maxLength: 2048
     EnrollmentFidoRegistration:
       type: object
       description: Objeto que contém a resposta da criação de uma nova credencial FIDO2.
