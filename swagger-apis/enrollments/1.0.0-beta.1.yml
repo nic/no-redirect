@@ -1535,7 +1535,7 @@ components:
             - requestDateTime
           properties:
             requestDateTime:
-              description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+              description: 'Data e hora da consulta, conforme especificação RFC-3339, timezone UTC(UTC time format).'
               type: string
               maxLength: 20
               format: date-time
