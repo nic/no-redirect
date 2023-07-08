@@ -851,7 +851,7 @@ components:
       properties:
         data:
           type: object
-          description: Objeto que agrega o vínculo de conta aos sinais de risco para avaliação da autorização de um consentimento de pagamento.
+          description: Objeto que contém sinais de risco e o id do vínculo de conta para avaliação da autorização de um consentimento de pagamento.
           required:
             - enrollmentId
             - riskSignals
