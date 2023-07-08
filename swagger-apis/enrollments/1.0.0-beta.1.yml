@@ -596,6 +596,7 @@ components:
       type: object
       required:
         - errors
+        - meta
       properties:
         errors:
           type: array
@@ -648,10 +649,13 @@ components:
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
                   
                   • STATUS_CONSENTIMENTO_INVALIDO: O status do consentimento não permite autorização.
+        meta:
+          $ref: '#/components/schemas/Meta'
     422ResponseErrorFidoRegistration:
       type: object
       required:
         - errors
+        - meta
       properties:
         errors:
           type: array
@@ -725,6 +729,8 @@ components:
                   • PUBLIC_KEY_INVALIDA: A chave pública enviada é incompatível com as definições do servidor FIDO2.
                   
                   • EXTENSION_INVALIDA: As extensões extraídas são incompatíveis com as diretrizes de segurança do servidor FIDO2.
+        meta:
+          $ref: '#/components/schemas/Meta'
     422ResponseConsentsAuthorization:
       type: object
       required:
@@ -1241,6 +1247,8 @@ components:
       type: object
       required:
         - data
+        - links
+        - meta
       properties:
         data:
           type: object
@@ -1271,6 +1279,10 @@ components:
               description: Campo de extensão com opções que variam por plataforma.
               additionalProperties:
                 type: string
+        links:
+          $ref: '#/components/schemas/LinkSingle'
+        meta:
+          $ref: '#/components/schemas/Meta'
     EnumAccountPaymentsType:
       type: string
       enum:
