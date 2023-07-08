@@ -735,6 +735,7 @@ components:
       type: object
       required:
         - errors
+        - meta
       properties:
         errors:
           type: array
@@ -794,6 +795,8 @@ components:
                   • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.
                   
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
+        meta:
+          $ref: '#/components/schemas/Meta'
     BusinessEntity:
       type: object
       description: 'Usuário (pessoa jurídica) que encontra-se logado na instituição Iniciadora de Pagamento. [Restrição] Preenchimento obrigatório se usuário logado na instituição Iniciadora de Pagamento for um CNPJ (pessoa jurídica).'
