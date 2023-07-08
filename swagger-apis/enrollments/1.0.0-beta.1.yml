@@ -134,7 +134,7 @@ paths:
         - $ref: '#/components/parameters/XIdempotencyKey'
       requestBody:
         required: true
-        description: Dados para regovação do consentimento
+        description: Dados para regovação do vínculo de conta.
         content:
           application/jwt:
             schema:
@@ -383,7 +383,7 @@ paths:
       description: |
         Autorização de um consentimento de pagamentos a partir do access token emitido pela jornada sem redirecionamento e envio de sinais de risco.
         O consentimento de pagamento deve transitar ao status "AUTHORISED" na execução com sucesso deste método.
-        Em caso de falha, o status do payment consent transitará par o status "REJECTED".
+        Em caso de falha, o status do consentimento do pagamento transitará par o status "REJECTED".
       parameters:
         - $ref: '#/components/parameters/consentId'
         - $ref: '#/components/parameters/Authorization'
