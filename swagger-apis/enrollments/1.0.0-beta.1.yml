@@ -799,7 +799,7 @@ components:
           $ref: '#/components/schemas/Meta'
     BusinessEntity:
       type: object
-      description: 'Usuário (pessoa jurídica) que encontra-se logado na instituição Iniciadora de Pagamento. [Restrição] Preenchimento obrigatório se usuário logado na instituição Iniciadora de Pagamento for um CNPJ (pessoa jurídica).'
+      description: 'Usuário (pessoa jurídica) que encontra-se logado na iniciadora. [Restrição] Preenchimento obrigatório se usuário logado na iniciadora for um CNPJ (pessoa jurídica).'
       required:
         - document
       properties:
@@ -940,7 +940,7 @@ components:
                       description: Largura da tela, em pixels.
                 accountTenure:
                   type: integer
-                  description: Indica há quanto tempo o cliente realizou seu cadastro na ITP.
+                  description: Indica há quanto tempo o cliente realizou seu cadastro na iniciadora.
     DebtorAccount:
       type: object
       description: |
@@ -1147,7 +1147,7 @@ components:
         data:
           type: object
           description: |
-            Objeto que contém as informações sobre a Relying Party e a plataforma sobre a qual o usuário está utilizando o serviço da ITP para utilização de FIDO2.
+            Objeto que contém as informações sobre a Relying Party e a plataforma sobre a qual o usuário está utilizando o serviço da iniciadora para utilização de FIDO2.
           required:
             - rp
             - platform
@@ -1450,7 +1450,7 @@ components:
             Em caso de pessoa jurídica deve ser informada a razão social ou o nome fantasia da conta do recebedor.
     LoggedUser:
       type: object
-      description: Usuário (pessoa natural) que encontra-se logado na instituição Iniciadora de Pagamento.
+      description: Usuário (pessoa natural) que encontra-se logado na iniciadora.
       required:
         - document
       properties:
@@ -1710,7 +1710,7 @@ components:
       type: oauth2
       description: |
         Fluxo OAuth necessário para que a iniciadora possa iniciar pagamentos. Requer o processo de redirecionamento e autenticação do usuário.  
-        Apenas pagamentos iniciados pela mesma iniciadora de pagamentos podem ser consultados ou cancelados através de modelo client credentials.
+        Apenas pagamentos iniciados pela mesma iniciadora podem ser consultados ou cancelados através de modelo client credentials.
       flows:
         clientCredentials:
           tokenUrl: 'https://authserver.example/token'
