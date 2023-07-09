@@ -9,5 +9,5 @@
 <br/>
 
 
-- [Swagger Enrollments](https://github.com/nic/no-redirect/blob/main/swagger-apis/enrollments/1.0.0-beta.1.yml) 
+- [Swagger Enrollments](https://github.com/nic/no-redirect/blob/main/swagger-apis/enrollments/1.0.0-beta.1.yml](https://raw.githubusercontent.com/nic/no-redirect/main/swagger-apis/enrollments/1.0.0-beta.1.yml)https://raw.githubusercontent.com/nic/no-redirect/main/swagger-apis/enrollments/1.0.0-beta.1.yml) 
 
