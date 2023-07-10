@@ -121,9 +121,18 @@ paths:
     patch:
       tags:
         - Dispositivo vinculado
-      summary: Revogar vínculo de conta.
+      summary: Revogar ou rejeitar vínculo de conta.
       operationId: deleteEnrollment
-      description: Método para revogar um vínculo de conta.
+      description: |
+        Método para revogar ou rejeitar um vínculo de conta. Após a execução com sucesso deste método irreversível, o vínculo de conta
+        não poderá mais ser utilizado para autenticação nem autorização de iniciação de pagamentos.
+        Os conceitos de revogação e rejeição estão associados à máquina de estados do vínculo de conta\:
+        
+        • Revogação: Cancelamento de um vínculo de conta no status "AUTHORISED";
+        
+        • Rejeição: Cancealemento do vínculo de conta nos status "AWATING_AUTHORISATION" e "AWATING_ENROLLMENT".
+        
+        Cabe ao cliente desta API distinguir entre os dois cenários para determinar o motivo adequado.
       parameters:
         - $ref: '#/components/parameters/enrollmentId'
         - $ref: '#/components/parameters/Authorization'
@@ -517,6 +526,14 @@ components:
                   Códigos de erros previstos na criação do vínculo de conta:
 
                   • STATUS_INVALIDO: O status do vínculo de conta não permite cancelamento.
+                  
+                  • MOTIVO_REJEICAO: A rejeição do vínculo de conta deve estar associada a um motivo de rejeição.
+                  
+                  • REJEITADO_OUTRO_SEM_DETALHES: O uso do motivo REJEITADO_OUTRO, deve estar acompanhado de descrição (additionalInformation).
+                  
+                  • MOTIVO_REVOGACAO: A revogação do vínculo de conta deve estar associada a um motivo de revogação.
+                  
+                  • REVOGADO_OUTRO_SEM_DETALHES: O uso do motivo REVOGADO_OUTRO deve estar acompanhado de descrição (additionalInformation)
               title:
                 type: string
                 maxLength: 255
@@ -526,6 +543,14 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • STATUS_INVALIDO: Status inválido.
+                  
+                  • MOTIVO_REJEICAO: Motivo de rejeição não especificado.
+
+                  • REJEITADO_OUTRO_SEM_DETALHES: O campo additionalInformation é obrigatório.
+
+                  • MOTIVO_REVOGACAO: Motivo de revogação não especificado.
+
+                  • REVOGADO_OUTRO_SEM_DETALHES: O campo additionalInformation é obrigatório.
               detail:
                 type: string
                 maxLength: 2048
@@ -535,6 +560,14 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • STATUS_INVALIDO: O status do vínculo de conta não permite cancelamento.
+                  
+                  • MOTIVO_REJEICAO: A rejeição do vínculo de conta deve estar associada a um motivo de rejeição.
+
+                  • REJEITADO_OUTRO_SEM_DETALHES: O uso do motivo REJEITADO_OUTRO, deve estar acompanhado de descrição (additionalInformation).
+
+                  • MOTIVO_REVOGACAO: A revogação do vínculo de conta deve estar associada a um motivo de revogação.
+
+                  • REVOGADO_OUTRO_SEM_DETALHES: O uso do motivo REVOGADO_OUTRO deve estar acompanhado de descrição (additionalInformation)
         meta:
           $ref: '#/components/schemas/Meta'
     422ResponseErrorFidoRegistrationOptions:
@@ -1017,43 +1050,80 @@ components:
                           example: CPF
                           pattern: '^[A-Z]{3}$'
                 reason:
-                  type: string
-                  enum:
-                    - REJEITADO_TEMPO_EXPIRADO_AUTHORISATION
-                    - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT
-                    - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO
-                    - REJEITADO_MANUALMENTE
-                    - REJEITADO_DISPOSITIVO_INCOMPATIVEL
-                    - REJEITADO_FALHA_INFRAESTRUTURA
-                    - REJEITADO_FALHA_HYBRID_FLOW
-                    - REJEITADO_FALHA_FIDO
-                    - REJEITADO_SEGURANCA_INTERNA
-                    - REVOGADO_MANUALMENTE
-                    - REVOGADO_VALIDADE_EXPIRADA
-                    - REVOGADO_FALHA_INFRAESTRUTURA
-                    - REVOGADO_SEGURANCA_INTERNA
-                    - OUTRO
-                  description: |
-                    Indica o motivo do cancelamento do vínculo de conta. Valores possíveis:
-                    
-                    • REJEITADO_TEMPO_EXPIRADO_AUTHORISATION: Expiração automática devido a timeout no status "AWAITING_AUTHORISATION". O processo de redirecionamento não foi concluído com sucesso a tempo.
-                    • REJEITADO_TEMPO_EXPIRADO_ENROLLMENT: Expiração automática devido a timeout no status "AWAITING_ENROLLMENT". O processo de criação e envio de credenciais FIDO2 não foi condluído com sucesso a tempo.
-                    • REJEITADO_MAXIMO_CHALLENGES_ATINGIDO: Vínculo de conta rejeitado devido várias tentativas frustradas.
-                    • REJEITADO_MANUALMENTE: Cancelamento manual, explicitamente a mando do usuário.
-                    • REJEITADO_DISPOSITIVO_INCOMPATIVEL: Dispositivo não suporta o protocolo FIDO.
-                    • REJEITADO_FALHA_INFRAESTRUTURA: Falha na infraestrutura na detentora na etapa anterior ao aceite de vínculo.
-                    • REJEITADO_SEGURANCA_INTERNA: Vínculo de conta rejeitado devido à política de segurança de instituição detentora considerando a análise dos sinais de risco.
-                    • REJEITADO_FALHA_HYBRID_FLOW: Vínculo de conta rejeitado por falha técnica no processo de redirecionamento (por exemplo: troca de authorization code por access token no FAPI Hybrid flow)
-                    • REJEITADO_FALHA_FIDO: Vínculo de conta rejeitado por falha técnica no processo de validação ou associação da credencial pública FIDO.
-                    • REVOGADO_MANUALMENTE: Cancelamento manual, explicitamente a mando do usuário.
-                    • REVOGADO_VALIDADE_EXPIRADA: Expiração automática ao atingir o prazo limite do vínculo de conta.
-                    • REVOGADO_FALHA_INFRAESTRUTURA: Falha na infraestrutura na detentora na etapa após o aceite de vínculo.
-                    • REVOGADO_SEGURANCA_INTERNA: Vínculo de conta rejeitado devido à políticas de segurança tanto da iniciadora quanto da detentora em momento após o vínculo do dispositivo.
-                    • OUTRO: Outros motivos não descritos pelas demais. Indicar, neste caso, o motivo em "additionalInformation".
+                  oneOf:
+                    - type: object
+                      required:
+                      - rejectionReason
+                      description: Motivo da rejeição do vínculo de conta.
+                      properties:
+                        rejectionReason:
+                          $ref: '#/components/schemas/EnrollmentRejectionReason'
+                    - type: object
+                      required:
+                      - revocationReason
+                      description: Motivo da revogação do vínculo de conta.
+                      properties:
+                        revocationReason:
+                          $ref: '#/components/schemas/EnrollmentRevocationReason'
                 additionalInformation:
                   type: string
                   format: '[\w\W\s]*'
                   maxLength: 2048
+    EnrollmentRejectionReason:
+      type: string
+      enum:
+      - REJEITADO_TEMPO_EXPIRADO_AUTHORISATION
+      - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT
+      - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO
+      - REJEITADO_MANUALMENTE
+      - REJEITADO_DISPOSITIVO_INCOMPATIVEL
+      - REJEITADO_FALHA_INFRAESTRUTURA
+      - REJEITADO_FALHA_HYBRID_FLOW
+      - REJEITADO_FALHA_FIDO
+      - REJEITADO_SEGURANCA_INTERNA
+      - REJEITADO_OUTRO
+      description: |
+        Indica o motivo do cancelamento do vínculo de conta. Valores possíveis:
+
+        • REJEITADO_TEMPO_EXPIRADO_AUTHORISATION: Expiração automática devido a timeout no status "AWAITING_AUTHORISATION". O processo de redirecionamento não foi concluído com sucesso a tempo.
+        
+        • REJEITADO_TEMPO_EXPIRADO_ENROLLMENT: Expiração automática devido a timeout no status "AWAITING_ENROLLMENT". O processo de criação e envio de credenciais FIDO2 não foi condluído com sucesso a tempo.
+        
+        • REJEITADO_MAXIMO_CHALLENGES_ATINGIDO: Vínculo de conta rejeitado devido várias tentativas frustradas.
+        
+        • REJEITADO_MANUALMENTE: Cancelamento manual, explicitamente a mando do usuário.
+        
+        • REJEITADO_DISPOSITIVO_INCOMPATIVEL: Dispositivo não suporta o protocolo FIDO.
+        
+        • REJEITADO_FALHA_INFRAESTRUTURA: Falha na infraestrutura na detentora na etapa anterior ao aceite de vínculo.
+        
+        • REJEITADO_SEGURANCA_INTERNA: Vínculo de conta rejeitado devido à política de segurança de instituição detentora ou iniciadora considerando a análise dos sinais de risco.
+        
+        • REJEITADO_FALHA_HYBRID_FLOW: Vínculo de conta rejeitado por falha técnica no processo de redirecionamento (por exemplo: troca de authorization code por access token no FAPI Hybrid flow)
+        
+        • REJEITADO_FALHA_FIDO: Vínculo de conta rejeitado por falha técnica no processo de validação ou associação da credencial pública FIDO.
+        
+        • REJEITADO_OUTRO: Outros motivos não descritos pelas demais. Indicar, neste caso, o motivo em "additionalInformation".
+    EnrollmentRevocationReason:
+      type: string
+      enum:
+      - REVOGADO_MANUALMENTE
+      - REVOGADO_VALIDADE_EXPIRADA
+      - REVOGADO_FALHA_INFRAESTRUTURA
+      - REVOGADO_SEGURANCA_INTERNA
+      - REVOGADO_OUTRO
+      description: |
+        Indica o motivo do cancelamento do vínculo de conta. Valores possíveis:
+
+        • REVOGADO_MANUALMENTE: Cancelamento manual, explicitamente a mando do usuário.
+        
+        • REVOGADO_VALIDADE_EXPIRADA: Expiração automática ao atingir o prazo limite do vínculo de conta.
+        
+        • REVOGADO_FALHA_INFRAESTRUTURA: Falha na infraestrutura na detentora na etapa após o aceite de vínculo.
+        
+        • REVOGADO_SEGURANCA_INTERNA: Vínculo de conta rejeitado devido à políticas de segurança tanto da iniciadora quanto da detentora em momento após o vínculo do dispositivo.
+        
+        • REVOGADO_OUTRO: Outros motivos não descritos pelas demais. Indicar, neste caso, o motivo em "additionalInformation".
     EnrollmentFidoRegistration:
       type: object
       description: Objeto que contém a resposta da criação de uma nova credencial FIDO2.
