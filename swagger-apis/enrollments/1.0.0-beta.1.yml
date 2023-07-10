@@ -1401,13 +1401,6 @@ components:
         • AUTHORISED: Vínculo de conta pronto para uso.
         • REVOKED: Vínculo de conta revogado.
         • REJECTED: Vínculo de conta rejeitado.
-    EnumPaymentPersonType:
-      type: string
-      enum:
-        - PESSOA_NATURAL
-        - PESSOA_JURIDICA
-      description: |
-        Titular, pessoa natural ou juridica a quem se referem os dados de recebedor (creditor).
     FidoAuthenticatorSelectionCriteria:
       type: object
       description: Restrições adicionais sobre os tipos de autenticadores permitidos para o registro.
@@ -1484,35 +1477,6 @@ components:
           items:
             type: string
             example: usb, nfc, ble, smart-card, hybrid, internal
-    Identification:
-      type: object
-      description: Objeto contendo os dados do recebedor (creditor).
-      required:
-        - personType
-        - cpfCnpj
-        - name
-      properties:
-        personType:
-          $ref: '#/components/schemas/EnumPaymentPersonType'
-        cpfCnpj:
-          type: string
-          minLength: 11
-          maxLength: 14
-          pattern: '^\d{11}$|^\d{14}$'
-          example: '58764789000137'
-          description: |
-            Identificação da pessoa envolvida na transação.  
-            Preencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  
-            O CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.  
-            O CNPJ será utilizado com 14 números e deverá ser informado sem pontos ou traços.
-        name:
-          type: string
-          pattern: '^([A-Za-zÀ-ÖØ-öø-ÿ'' -]+)$'
-          maxLength: 120
-          example: Marco Antonio de Brito
-          description: |
-            Em caso de pessoa natural deve ser informado o nome completo do titular da conta do recebedor.  
-            Em caso de pessoa jurídica deve ser informada a razão social ou o nome fantasia da conta do recebedor.
     LoggedUser:
       type: object
       description: Usuário (pessoa natural) que encontra-se logado na iniciadora.
