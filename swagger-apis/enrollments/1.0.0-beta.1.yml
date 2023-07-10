@@ -2,6 +2,10 @@
 info:
   title: API Enrollments for Payment Initiation - Open Finance Brasil
   description: |
+    GDP: Os pontos foram apontados mas nao houve correção, necessário definir como o preenchimento das informações questionadas ocorrerá.  
+      * Pontos importantes: 
+      - Precisamos também definir descrições para os campos, no ecossistema, por padrão, temos descrição em todos os campos.
+      - Existem muitos campos com valores multiplos nos exemplos, não seriam do tipo ENUM ao invés de campo aberto?
     API de Dispositivo Vínculado para suportar Iniciação de Pagamentos na Jornada Sem Redirecionamento do Open Finance Brasil.
   version: 1.0.0-beta.1
   license:
@@ -138,7 +142,7 @@ paths:
         content:
           application/jwt:
             schema:
-              allOf:
+              allOf: #Não seria o oneOf ou o anyOf? Salvo engano, oneOf parece ser mais adequado, porque precisariamos de pelo menos um elemento em comum entre os schemas. allOf exige que todos os elementos tenham propriedades em comum.
                 - $ref: '#/components/schemas/EnrollmentCancellation'
                 - type: object
                   required:
@@ -149,7 +153,7 @@ paths:
                       required:
                         - cancellation
                       properties:
-                        cancellation:
+                        cancellation: #Esse objeto está imcompleto, necessário adicionar os elementos restantes
                           type: object
       responses:
         '204':
@@ -799,7 +803,7 @@ components:
           properties:
             loggedUser:
               $ref: '#/components/schemas/LoggedUser'
-            permissions:
+            permissions: #adicionar maxItems
               type: array
               minItems: 1
               items:
@@ -832,11 +836,11 @@ components:
                   type: object
                   properties:
                     latitude:
-                      type: number
-                      example:
+                      type: number 
+                      example: #adicionar exemplo, definir maximum
                     longitude:
-                      type: number
-                      example:
+                      type: number #definir format, definir maximum
+                      example: #adicionar exemplo
                     type:
                       type: string
                       enum:
@@ -844,17 +848,17 @@ components:
                         - FINE
                         - INFERRED
                 deviceId:
-                  type: string
+                  type: string #adicionar tamanho maximo
                   description: Identificador do dispositivo.
                 isRootedDevice:
                   type: boolean
                   description: Indica se o usuário possui permissão root no dispositivo.
                 screenBrightness:
-                  type: integer
+                  type: integer #definir format, adicionar maximum(ou seria o maximum do formato?)
                   description: Indica o nível de brilho da tela do dispositivo.
                 elapsedTimeSinceBoot:
                   type: integer
-                  format: int64
+                  format: int64 #adicionar maximum(ou seria o maximum do formato?)
                   description: Indica por quanto tempo o dispositivo está ligado desde a última inicialização.
                 isCallInProgress:
                   type: boolean
@@ -875,18 +879,18 @@ components:
                   type: boolean
                   description: Indica se a bateria do dispositivo está em carregamento.
                 antennaInformation:
-                  type: string
+                  type: string #adicionar tamanho maximo, adicionar pattern
                   description: Indica o tipo de conexão com a rede de celular do dispositivo.
                   example: 3G, 4G, 4G+, 5G
                 isUsbConnected:
                   type: boolean
                   description: Indica se existe ao menos uma conexão USB ao dispositivo.
                 userTimeZone:
-                  type: string
+                  type: string #adicionar tamanho maximo, adicionar pattern
                   description: 'Indica a configuração de fuso horário do dispositivo no formato UTC offset: ±hh[:mm]'
                   example: '-03'
                 language:
-                  type: string
+                  type: string #adicionar tamanho maximo, adicionar pattern
                   description: Indica o idioma do dispositivo no formato ISO 639-1.
                   example: 'pt'
                 screenDimensions:
@@ -897,13 +901,13 @@ components:
                     - width
                   properties:
                     height:
-                      type: integer
+                      type: integer #definir format, definir maximo, adicionar pattern
                       description: Altura da tela, em pixels.
                     width:
-                      type: integer
+                      type: integer #definir format, definir maximo, adicionar pattern
                       description: Largura da tela, em pixels.
                 accountTenure:
-                  type: integer
+                  type: integer #definir format, definir maximum, adicionar pattern
                   description: Indica há quanto tempo o cliente realizou seu cadastro na iniciadora.
     DebtorAccount:
       type: object
@@ -1052,7 +1056,7 @@ components:
                     • OUTRO: Outros motivos não descritos pelas demais. Indicar, neste caso, o motivo em "additionalInformation".
                 additionalInformation:
                   type: string
-                  format: '[\w\W\s]*'
+                  pattern: '[\w\W\s]*' #aqui é pattern, não format
                   maxLength: 2048
     EnrollmentFidoRegistration:
       type: object
@@ -1068,10 +1072,10 @@ components:
             - response
           properties:
             id:
-              type: string
+              type: string #adicionar tamanho maximo, adicionar pattern
               description: Identificador da credencial.
             rawId:
-              type: string
+              type: string #adicionar tamanho maximo, adicionar pattern
               description: Identificador da credencial. Pode ser igual a ao campo id.
             response:
               type: object
@@ -1080,21 +1084,21 @@ components:
                 - attestationObject
               properties:
                 clientDataJSON:
-                  type: string
-                  format: bytes
+                  type: string #adicionar tamanho maximo(mesmo sendo formato "byte", é bom ter limite de caractere), adicionar pattern (mesmo que seja genérico e abrangente)
+                  format: bytes 
                   description: Agrega as informações do aplicativo que gerou a credencial.
                   example: eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiTVRBeU16azRhMkZxYUhOclpHcG9ZV3R6Iiwib3JpZ2luIjoiaHR0cHM6Ly93d3cudzMub3JnIiwiY3Jvc3NPcmlnaW4iOmZhbHNlfQ==
                 attestationObject:
-                  type: string
-                  format: bytes
+                  type: string 
+                  format: bytes #adicionar tamanho maximo(mesmo sendo formato "byte", é bom ter limite de caractere), adicionar pattern (mesmo que seja genérico e abrangente)
                   description: Agrega as informações da chave pública da credencial.
                   example: o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEcwRQIgZyUMtm43lCCqzoIbSDeoCUpJzh/VSchwQNxFR2UM/DsCIQDWpp4+/nklI7G2HPVZCIqw08R9omcn9kJrKPsuIO5k22N4NWOBWQFIMIIBRDCB6qADAgECAgkBcwb/////QwMwCgYIKoZIzj0EAwIwGzEZMBcGA1UEAxMQR251YmJ5IEhTTSBDQSAwMDAiGA8yMDEyMDYwMTAwMDAwMFoYDzIwNjIwNTMxMjM1OTU5WjAwMRkwFwYDVQQDExBHb29nbGUgR251YmJ5IHYwMRMwEQYDVQQtAwoAAXMG/////0MDMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAELuWVatmVMfAOr53T6fh7X/iIgqKz5SCnKTBUnFo3FtbbslUGi8Qetr1nbyr6BVqGHqcJiXyvF6rVbj5fZqbiBTAKBggqhkjOPQQDAgNJADBGAiEA5GaaFxllkOr24b5s6Qu/4ch3ZgU+3GIAv/D8kj4EGMgCIQDXYfaVAMe7Jzht3ra4TaCKKpaUxp+nRkIO/SKiQZPjgmhhdXRoRGF0YVjEIYvQ2gJvAWdQFFLPcpStJJWLnFoQO0f5vT1T51P/rm5BAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCJ8iR8CqPctr4tz/YAICs6bDwVqhDzdt3oohVVWRQruy+E1AFeEWgPMWsIS4UU0n+sRGW3m2K90z1d9ujtFPxylAQIDJiABIVggaUaH0XDx9F2UOrT0ao02wL+xjGR/BxnCB4WOU2w0H8YiWCATuK2PUWGPophwPsfNIC3CZw4TGlCMEq1R15cw1w5KDg==
             authenticatorAttachment:
-              type: string
+              type: string #adicionar tamanho maximo, adicionar pattern
               description: Indica a forma de comunicação com o autenticador.
               example: platform, cross-platform
             type:
-              type: string
+              type: string #adicionar tamanho maximo, adicionar pattern
               description: Tipo da credencial
               example: public-key
             clientExtensionResults:
@@ -1116,7 +1120,7 @@ components:
             - platform
           properties:
             rp:
-              type: string
+              type: string #adicionar tamanho maximo, adicionar pattern
               description: Identificador único da Relying Party.
             platform:
               type: string
@@ -1156,27 +1160,27 @@ components:
               format: byte
               description: Sequência de bytes aleatórios gerados pelo servidor FIDO2, codificados em base64.
             pubKeyCredParams:
-              type: array
+              type: array #adicionar maxItems
               items:
                 $ref: '#/components/schemas/FidoPublicKeyCredentialCreationOptions'
             timeout:
               type: integer
               description: Timeout, em milissegundos, para registro da credencial FIDO2.
             excludeCredentials:
-              type: array
+              type: array #adicionar maxItems
               items:
                 $ref: '#/components/schemas/FidoPublicKeyCredentialDescriptor'
             authenticatorSelection:
               $ref: '#/components/schemas/FidoAuthenticatorSelectionCriteria'
             attestation:
-              type: string
+              type: string #definir maxLength, pattern
               description: Indica o tipo de attestation que o autenticador pode utilizar.
               example: none, indirect, direct, enterprise
             attestationFormats:
-              type: array
+              type: array #adicionar maxItems
               description: Indica as preferências de formato sobre o campo attestation.
               items:
-                type: string
+                type: string #adicionar pattern, maxLength
                 example: packed, tpm, android-key, android-safetynet, fido-u2f, apple, none
             extensions:
               type: object
@@ -1188,7 +1192,7 @@ components:
         meta:
           $ref: '#/components/schemas/Meta'
     EnrollmentRejectionFrom:
-      type: object
+      type: object 
       required:
         - data
       properties:
@@ -1253,26 +1257,26 @@ components:
             - challenge
           properties:
             challenge:
-              type: string
+              type: string 
               format: byte
               description: Sequência de bytes aleatórios gerados pelo servidor FIDO2, codificados em base64.
             timeout:
-              type: integer
+              type: integer #Definir tamanho maximo(tamanho do formato?)
               format: int32
               description: Expiração, em milissegundos, do challenge.
             rpId:
-              type: string
+              type: string  #definir maxLength, pattern
               description: Identificador da Relying Party.
             allowCredentials:
-              type: array
+              type: array #adicionar maxItems
               items:
                 $ref: '#/components/schemas/FidoPublicKeyCredentialDescriptor'
             userVerification:
-              type: string
+              type: string #definir maxLength, pattern
               example: required, preferred, discouraged
             extensions:
               type: object
-              description: Campo de extensão com opções que variam por plataforma.
+              description: Campo de extensão com opções que variam por plataforma. #Descrição das variações? Possíveis campos?
               additionalProperties:
                 type: string
         links:
@@ -1342,11 +1346,11 @@ components:
       description: Restrições adicionais sobre os tipos de autenticadores permitidos para o registro.
       properties:
         authenticatorAttachment:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: 'Indica os tipos de autenticadores suportados (ex: Sistema Operacional ou Cross-Platform como uma chave USB)'
           example: platform, cross-platform
         requireResidentKey:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Indica o tipo de "discoverability" da credencial.
           example: discouraged, preferred, required
         userVerification:
@@ -1359,7 +1363,7 @@ components:
         - name
       properties:
         id:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Identificador único da Relying Party.
         name:
           type: string
@@ -1372,13 +1376,13 @@ components:
         - displayName
       properties:
         id:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Identificador único do usuário sob registro.
         name:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Identificador do usuário human-readable.
         displayName:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Identificador do usuário para fins de apresentação.
     FidoPublicKeyCredentialCreationOptions:
       type: object
@@ -1391,7 +1395,7 @@ components:
           description: Identificador do algoritmo (COSE)
           example: -7 (ES256)
         type:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Identificador do tipo de credencial.
           example: public-key
     FidoPublicKeyCredentialDescriptor:
@@ -1401,19 +1405,19 @@ components:
         - type
       properties:
         id:
-          type: string
+          type: string #adicionar pattern, maxLength
           description: Identificador único da credencial.
         type:
           type: string
           description: Identificador do tipo de credencial.
           example: public-key
         transports:
-          type: array
+          type: array #adicionar maxItems
           description: Indicação opcional de como o cliente pode se comunicar com o autenticador do dispositivo.
           items:
-            type: string
+            type: string #adicionar pattern, maxLength
             example: usb, nfc, ble, smart-card, hybrid, internal
-    Identification:
+    Identification: #Objeto nao esta sendo usado, remover?
       type: object
       description: Objeto contendo os dados do recebedor (creditor).
       required:
@@ -1572,7 +1576,7 @@ components:
               maxLength: 20
               description: O instante em que ocorreu a última alteração de status do vínculo de conta.
             permissions:
-              type: array
+              type: array #adicionar maxItems
               minItems: 1
               items:
                 $ref: '#/components/schemas/EnumEnrollmentPermission'
