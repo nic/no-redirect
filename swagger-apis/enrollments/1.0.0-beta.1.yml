@@ -1067,7 +1067,8 @@ components:
                           $ref: '#/components/schemas/EnrollmentRevocationReason'
                 additionalInformation:
                   type: string
-                  format: '[\w\W\s]*'
+                  pattern: '[\w\W\s]*'
+                  example: Contrato entre ITP e detentora interrompido
                   maxLength: 2048
     EnrollmentRejectionReason:
       type: string
