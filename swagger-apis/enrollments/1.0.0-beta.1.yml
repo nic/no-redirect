@@ -469,7 +469,6 @@ components:
                   Códigos de erros previstos na criação do vínculo de conta:
                   
                   • PERMISSOES_INVALIDAS: As permissões associadas ao vínculo de conta não contêm "PAYMENTS_INITIATE".
-                  
                   • CONTA_INVALIDA: A conta informada inexiste ou não é compatível com o fluxo de não-redirecionamento.
               title:
                 type: string
@@ -480,7 +479,6 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
                   
                   • PERMISSOES_INVALIDAS: Permissões inválidas.
-                  
                   • CONTA_INVALIDA: Conta inválida.
               detail:
                 type: string
@@ -490,8 +488,7 @@ components:
                 description: |
                   Descrição específica do erro de acordo com o código reportado:
                   
-                  • PERMISSOES_INVALIDAS: As permissões associadas ao vínculo de conta não contêm "PAYMENTS_INITIATE" ou contém valores não suportados para esta operação.
-                  
+                  • PERMISSOES_INVALIDAS: As permissões associadas ao vínculo de conta não contêm "PAYMENTS_INITIATE" ou contém valores não suportados para esta operação.  
                   • CONTA_INVALIDA: A conta informada inexiste ou não é compatível com o fluxo de não-redirecionamento.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -566,7 +563,6 @@ components:
                   Códigos de erros previstos:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
-
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
               title:
                 type: string
@@ -577,7 +573,6 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • RP_INVALIDA: Relying party inválida.
-
                   • STATUS_VINCULO_INVALIDO: Status do vínculo de conta inválido.
               detail:
                 type: string
@@ -588,7 +583,6 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
-
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -619,9 +613,7 @@ components:
                   Códigos de erros previstos:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
-
-                  • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
-                  
+                  • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial. 
                   • STATUS_CONSENTIMENTO_INVALIDO: O status do consentimento não permite autorização.
               title:
                 type: string
@@ -632,9 +624,7 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • RP_INVALIDA: Relying party inválida.
-
                   • STATUS_VINCULO_INVALIDO: Status do vínculo de conta inválido.
-                  
                   • STATUS_CONSENTIMENTO_INVALIDO: Status do consentimento de pagamento inválido.
               detail:
                 type: string
@@ -645,9 +635,7 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
-
-                  • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
-                  
+                  • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial. 
                   • STATUS_CONSENTIMENTO_INVALIDO: O status do consentimento não permite autorização.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -681,15 +669,10 @@ components:
                   Códigos de erros previstos:
 
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
-
                   • ORIGEM_FIDO_INVALIDA: O valor contido no campo response.clientDataJSON.origin não pode ser verificado. 
-                  
                   • RP_INVALIDA: O valor contido no campo response.attestationObject.authData.rpIdHash não pode ser verificado.
-                  
                   • CHALLENGE_INVALIDO: O campo response.clientDataJSON.challenge possui valor codificado diferente do valor gerado pelo servidor.
-                  
                   • PUBLIC_KEY_INVALIDA: A chave pública enviada é incompatível com as definições do servidor FIDO2.
-                  
                   • EXTENSION_INVALIDA: As extensões extraídas são incompatíveis com as diretrizes de segurança do servidor FIDO2.
               title:
                 type: string
@@ -700,15 +683,10 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • STATUS_VINCULO_INVALIDO: Status inválido do vínculo de conta.
-
                   • ORIGEM_FIDO_INVALIDA: "Origin" não pode ser verificada. 
-                  
                   • RP_INVALIDA: "RpIdHash" não pode ser verificado.
-                  
                   • CHALLENGE_INVALIDO: Challenge inválido.
-
                   • PUBLIC_KEY_INVALIDA: Chave pública inválida.
-
                   • EXTENSION_INVALIDA: Extensões inválidas.
               detail:
                 type: string
@@ -719,15 +697,10 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
-
-                  • ORIGEM_FIDO_INVALIDA: O valor contido no campo response.clientDataJSON.origin não pode ser verificado. 
-                  
+                  • ORIGEM_FIDO_INVALIDA: O valor contido no campo response.clientDataJSON.origin não pode ser verificado.
                   • RP_INVALIDA: O valor contido no campo response.attestationObject.authData.rpIdHash não pode ser verificado.
-                  
                   • CHALLENGE_INVALIDO: O campo response.clientDataJSON.challenge possui valor codificado diferente do valor gerado pelo servidor.
-                  
                   • PUBLIC_KEY_INVALIDA: A chave pública enviada é incompatível com as definições do servidor FIDO2.
-                  
                   • EXTENSION_INVALIDA: As extensões extraídas são incompatíveis com as diretrizes de segurança do servidor FIDO2.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -759,11 +732,8 @@ components:
                   Códigos de erros previstos:
 
                   • STATUS_VINCULO_INVALIDO: O vínculo de conta não possui status AUTHORISED.
-                  
                   • STATUS_CONSENTIMENTO_INVALIDO: O consentimento de pagamentos não possui status AWAITING_AUTHORISATION.
-                  
-                  • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.
-                  
+                  • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.                  
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
               title:
                 type: string
@@ -774,11 +744,8 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • STATUS_VINCULO_INVALIDO: Status do vínculo de conta inválido.
-                  
                   • STATUS_CONSENTIMENTO_INVALIDO: Status do consentimento inválido.
-                  
                   • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.
-                  
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Falta de sinais obrigatórios para a plataforma do usuário.
               detail:
                 type: string
@@ -789,11 +756,8 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • STATUS_VINCULO_INVALIDO: O vínculo de conta não possui status AUTHORISED.
-                  
                   • STATUS_CONSENTIMENTO_INVALIDO: O consentimento de pagamentos não possui status AWAITING_AUTHORISATION.
-                  
                   • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.
-                  
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -1055,38 +1019,37 @@ components:
                 reason:
                   type: string
                   enum:
-                    - EXPIRED_AWAITING_AUTHORISATION
-                    - EXPIRED_AWAITING_ENROLLMENT
-                    - EXPIRATION_DATE_REACHED
-                    - MANUAL_CANCEL
-                    - INTERNAL_SECURITY_REASON
-                    - MAX_CHALLENGES_REACHED
-                    - UNSUPPORTED_DEVICE
-                    - ENROLLMENT_TECHNICAL_ISSUE_HYBRID_FLOW
-                    - ENROLLMENT_TECHNICAL_ISSUE_FIDO
-                    - OTHER
+                    - REJEITADO_TEMPO_EXPIRADO_AUTHORISATION
+                    - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT
+                    - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO
+                    - REJEITADO_MANUALMENTE
+                    - REJEITADO_DISPOSITIVO_INCOMPATIVEL
+                    - REJEITADO_FALHA_INFRAESTRUTURA
+                    - REJEITADO_FALHA_HYBRID_FLOW
+                    - REJEITADO_FALHA_FIDO
+                    - REJEITADO_SEGURANCA_INTERNA
+                    - REVOGADO_MANUALMENTE
+                    - REVOGADO_VALIDADE_EXPIRADA
+                    - REVOGADO_FALHA_INFRAESTRUTURA
+                    - REVOGADO_SEGURANCA_INTERNA
+                    - OUTRO
                   description: |
                     Indica o motivo do cancelamento do vínculo de conta. Valores possíveis:
                     
-                    • EXPIRED_AWAITING_AUTHORISATION: Expiração automática devido a timeout no status "AWAITING_AUTHORISATION". O processo de redirecionamento não foi concluído com sucesso a tempo.
-                    
-                    • EXPIRED_AWAITING_ENROLLMENT: Expiração automática devido a timeout no status "AWAITING_ENROLLMENT". O processo de criação e envio de credenciais FIDO2 não foi condluído com sucesso a tempo.
-                    
-                    • EXPIRATION_DATE_REACHED: Expiração automática ao atingir o prazo limite do vínculo de conta.
-                    
-                    • MANUAL_CANCEL: Cancelamento manual, explicitamente a mando do usuário.
-                    
-                    • INTERNAL_SECURITY_REASON: Vínculo de conta rejeitado devido à política de segurança de instituição detentora considerando a análise dos sinais de risco.
-                    
-                    • MAX_CHALLENGES_REACHED: Vínculo de conta rejeitado devido ao usuário.
-                    
-                    • UNSUPPORTED_DEVICE: Vínculo de conta rejeitado pela utilização de dispositivo sem suporte a FIDO2.
-                    
-                    • ENROLLMENT_TECHNICAL_ISSUE_HYBRID_FLOW: Vínculo de conta rejeitado por falha técnica no processo de redirecionamento (por exemplo: troca de authorization code por access token no FAPI Hybrid flow)
-                    
-                    • ENROLLMENT_TECHNICAL_ISSUE_FIDO: Vínculo de conta rejeitado por falha técnica no processo de validação ou associação da credencial pública FIDO.
-                    
-                    • OTHER: Outros motivos não descritos pelas demais. Indicar, neste caso, o motivo em "additionalInformation".
+                    • REJEITADO_TEMPO_EXPIRADO_AUTHORISATION: Expiração automática devido a timeout no status "AWAITING_AUTHORISATION". O processo de redirecionamento não foi concluído com sucesso a tempo.
+                    • REJEITADO_TEMPO_EXPIRADO_ENROLLMENT: Expiração automática devido a timeout no status "AWAITING_ENROLLMENT". O processo de criação e envio de credenciais FIDO2 não foi condluído com sucesso a tempo.
+                    • REJEITADO_MAXIMO_CHALLENGES_ATINGIDO: Vínculo de conta rejeitado devido várias tentativas frustradas.
+                    • REJEITADO_MANUALMENTE: Cancelamento manual, explicitamente a mando do usuário.
+                    • REJEITADO_DISPOSITIVO_INCOMPATIVEL: Dispositivo não suporta o protocolo FIDO.
+                    • REJEITADO_FALHA_INFRAESTRUTURA: Falha na infraestrutura na detentora na etapa anterior ao aceite de vínculo.
+                    • REJEITADO_SEGURANCA_INTERNA: Vínculo de conta rejeitado devido à política de segurança de instituição detentora considerando a análise dos sinais de risco.
+                    • REJEITADO_FALHA_HYBRID_FLOW: Vínculo de conta rejeitado por falha técnica no processo de redirecionamento (por exemplo: troca de authorization code por access token no FAPI Hybrid flow)
+                    • REJEITADO_FALHA_FIDO: Vínculo de conta rejeitado por falha técnica no processo de validação ou associação da credencial pública FIDO.
+                    • REVOGADO_MANUALMENTE: Cancelamento manual, explicitamente a mando do usuário.
+                    • REVOGADO_VALIDADE_EXPIRADA: Expiração automática ao atingir o prazo limite do vínculo de conta.
+                    • REVOGADO_FALHA_INFRAESTRUTURA: Falha na infraestrutura na detentora na etapa após o aceite de vínculo.
+                    • REVOGADO_SEGURANCA_INTERNA: Vínculo de conta rejeitado devido à políticas de segurança tanto da iniciadora quanto da detentora em momento após o vínculo do dispositivo.
+                    • OUTRO: Outros motivos não descritos pelas demais. Indicar, neste caso, o motivo em "additionalInformation".
                 additionalInformation:
                   type: string
                   format: '[\w\W\s]*'
@@ -1361,6 +1324,7 @@ components:
         - REJECTED
       description: |
         Status do vínculo de conta:
+
         • AWAITING_AUTHORISATION: Vínculo de conta criado e aguando autorização no ambiente da dentora de conta.
         • AWAITING_ENROLLMENT: Vínculo de conta autorizado no ambiente da detentora e aguardando o vínculo de credenciais (FIDO2).
         • AUTHORISED: Vínculo de conta pronto para uso.
