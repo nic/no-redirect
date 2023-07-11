@@ -478,6 +478,7 @@ components:
                   Códigos de erros previstos na criação do vínculo de conta:
                   
                   • PERMISSOES_INVALIDAS: As permissões associadas ao vínculo de conta não contêm "PAYMENTS_INITIATE".
+                  
                   • CONTA_INVALIDA: A conta informada inexiste ou não é compatível com o fluxo de não-redirecionamento.
               title:
                 type: string
@@ -488,6 +489,7 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
                   
                   • PERMISSOES_INVALIDAS: Permissões inválidas.
+                  
                   • CONTA_INVALIDA: Conta inválida.
               detail:
                 type: string
@@ -498,6 +500,7 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
                   
                   • PERMISSOES_INVALIDAS: As permissões associadas ao vínculo de conta não contêm "PAYMENTS_INITIATE" ou contém valores não suportados para esta operação.  
+                  
                   • CONTA_INVALIDA: A conta informada inexiste ou não é compatível com o fluxo de não-redirecionamento.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -596,6 +599,7 @@ components:
                   Códigos de erros previstos:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
+                  
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
               title:
                 type: string
@@ -606,6 +610,7 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • RP_INVALIDA: Relying party inválida.
+                  
                   • STATUS_VINCULO_INVALIDO: Status do vínculo de conta inválido.
               detail:
                 type: string
@@ -616,6 +621,7 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
+                  
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -646,7 +652,9 @@ components:
                   Códigos de erros previstos:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
+                  
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial. 
+                  
                   • STATUS_CONSENTIMENTO_INVALIDO: O status do consentimento não permite autorização.
               title:
                 type: string
@@ -657,7 +665,9 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • RP_INVALIDA: Relying party inválida.
+                  
                   • STATUS_VINCULO_INVALIDO: Status do vínculo de conta inválido.
+                  
                   • STATUS_CONSENTIMENTO_INVALIDO: Status do consentimento de pagamento inválido.
               detail:
                 type: string
@@ -668,7 +678,9 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • RP_INVALIDA: O identificador da Relying Party informado não pode ser verificado.
+                  
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial. 
+                  
                   • STATUS_CONSENTIMENTO_INVALIDO: O status do consentimento não permite autorização.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -702,10 +714,15 @@ components:
                   Códigos de erros previstos:
 
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
+                  
                   • ORIGEM_FIDO_INVALIDA: O valor contido no campo response.clientDataJSON.origin não pode ser verificado. 
+                  
                   • RP_INVALIDA: O valor contido no campo response.attestationObject.authData.rpIdHash não pode ser verificado.
+                  
                   • CHALLENGE_INVALIDO: O campo response.clientDataJSON.challenge possui valor codificado diferente do valor gerado pelo servidor.
+                  
                   • PUBLIC_KEY_INVALIDA: A chave pública enviada é incompatível com as definições do servidor FIDO2.
+                  
                   • EXTENSION_INVALIDA: As extensões extraídas são incompatíveis com as diretrizes de segurança do servidor FIDO2.
               title:
                 type: string
@@ -716,10 +733,15 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • STATUS_VINCULO_INVALIDO: Status inválido do vínculo de conta.
+                  
                   • ORIGEM_FIDO_INVALIDA: "Origin" não pode ser verificada. 
+                  
                   • RP_INVALIDA: "RpIdHash" não pode ser verificado.
+                  
                   • CHALLENGE_INVALIDO: Challenge inválido.
+                  
                   • PUBLIC_KEY_INVALIDA: Chave pública inválida.
+                  
                   • EXTENSION_INVALIDA: Extensões inválidas.
               detail:
                 type: string
@@ -730,10 +752,15 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • STATUS_VINCULO_INVALIDO: O status do vínculo de conta é tal que não permite o registro de nova credencial.
+                  
                   • ORIGEM_FIDO_INVALIDA: O valor contido no campo response.clientDataJSON.origin não pode ser verificado.
+                  
                   • RP_INVALIDA: O valor contido no campo response.attestationObject.authData.rpIdHash não pode ser verificado.
+                  
                   • CHALLENGE_INVALIDO: O campo response.clientDataJSON.challenge possui valor codificado diferente do valor gerado pelo servidor.
+                  
                   • PUBLIC_KEY_INVALIDA: A chave pública enviada é incompatível com as definições do servidor FIDO2.
+                  
                   • EXTENSION_INVALIDA: As extensões extraídas são incompatíveis com as diretrizes de segurança do servidor FIDO2.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -765,8 +792,11 @@ components:
                   Códigos de erros previstos:
 
                   • STATUS_VINCULO_INVALIDO: O vínculo de conta não possui status AUTHORISED.
+                  
                   • STATUS_CONSENTIMENTO_INVALIDO: O consentimento de pagamentos não possui status AWAITING_AUTHORISATION.
+                  
                   • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.                  
+                  
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
               title:
                 type: string
@@ -777,8 +807,11 @@ components:
                   Título específico do erro reportado, de acordo com o código enviado:
 
                   • STATUS_VINCULO_INVALIDO: Status do vínculo de conta inválido.
+                  
                   • STATUS_CONSENTIMENTO_INVALIDO: Status do consentimento inválido.
+                  
                   • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.
+                  
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Falta de sinais obrigatórios para a plataforma do usuário.
               detail:
                 type: string
@@ -789,8 +822,11 @@ components:
                   Descrição específica do erro de acordo com o código reportado:
 
                   • STATUS_VINCULO_INVALIDO: O vínculo de conta não possui status AUTHORISED.
+                  
                   • STATUS_CONSENTIMENTO_INVALIDO: O consentimento de pagamentos não possui status AWAITING_AUTHORISATION.
+                  
                   • RISCO: Validação síncrona dos sinais de risco impediram a ativação do consentimento.
+                  
                   • FALTAM_SINAIS_OBRIGATORIOS_DA_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
         meta:
           $ref: '#/components/schemas/Meta'
@@ -1397,9 +1433,13 @@ components:
         Status do vínculo de conta:
 
         • AWAITING_AUTHORISATION: Vínculo de conta criado e aguando autorização no ambiente da dentora de conta.
+        
         • AWAITING_ENROLLMENT: Vínculo de conta autorizado no ambiente da detentora e aguardando o vínculo de credenciais (FIDO2).
+        
         • AUTHORISED: Vínculo de conta pronto para uso.
+        
         • REVOKED: Vínculo de conta revogado.
+        
         • REJECTED: Vínculo de conta rejeitado.
     FidoAuthenticatorSelectionCriteria:
       type: object
