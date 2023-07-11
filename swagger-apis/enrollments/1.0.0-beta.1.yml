@@ -1143,7 +1143,7 @@ components:
               description: Identificador da credencial.
             rawId:
               type: string
-              description: Identificador da credencial. Pode ser igual a ao campo id.
+              description: Identificador da credencial. Pode ser igual ao campo id.
             response:
               type: object
               required:
