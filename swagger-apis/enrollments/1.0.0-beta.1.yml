@@ -1068,7 +1068,7 @@ components:
                 additionalInformation:
                   type: string
                   pattern: '[\w\W\s]*'
-                  example: Contrato entre ITP e detentora interrompido
+                  example: Contrato entre iniciadora e detentora interrompido
                   maxLength: 2048
     EnrollmentRejectionReason:
       type: string
@@ -1300,7 +1300,7 @@ components:
               example: '100000.12'
               description: |
                 Valor máximo, por transação, admitido para este vínculo de conta. Este limite não garante a autorização de iniciações de pagamento;
-                servindo como referência para a ITP evitar a criação de consentimentos de valores tais que, garantidamente, não serão autorizados.
+                servindo como referência para a iniciadora evitar a criação de consentimentos de valores tais que, garantidamente, não serão autorizados.
             dailyLimit:
               type: string
               minLength: 4
@@ -1309,7 +1309,7 @@ components:
               example: '100000.12'
               description: |
                 Limite diário cumulativo para este vínculo de conta. Este limite não garante a autorização de iniciações de pagamento;
-                servindo como referência para a ITP evitar a criação de consentimentos para valores tais que, garantidamente, não serão autorizados.
+                servindo como referência para a iniciadora evitar a criação de consentimentos para valores tais que, garantidamente, não serão autorizados.
     EnrollmentFidoSignOptions:
       type: object
       required:
